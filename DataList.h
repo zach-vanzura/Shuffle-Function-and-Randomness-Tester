@@ -84,12 +84,14 @@ public:
         vector<T> firstHalfVec (copyVec.begin(), (copyVec.begin() + copyVec.size() / 2));
         vector<T> secondHalfVec (copyVec.begin() + copyVec.size() / 2, copyVec.end());
         T temp;
+        // get two random numbers within the range of the sizes of the vectors
         int rand1 = getRandomNumber(firstHalfVec);
         int rand2 = getRandomNumber(secondHalfVec);
-        //ensures numRepeats isn't 0
+
+        // ensures numRepeats isn't 0
         int numRepeats = 1 + getRandomNumber(copyVec);
 
-        //shuffles the vector 1 - vector size + 1
+        // shuffles each half a random number of times up to the total size of the vector.
         for (int i = 0; i < numRepeats; ++i){
             for (int v1 = 0; v1 < firstHalfVec.size(); ++v1){
                 //get two random numbers and swap the first for the second
