@@ -1,8 +1,10 @@
-//
-// Created by jack on 2/12/2024.
-//
-#ifndef M2AP_DATALIST_H
-#define M2AP_DATALIST_H
+/**
+ * DataList.h is a template class that includes two different shuffle methods
+ * The methods will work with a vector of any datatype.
+ * Written by: Zach Vanzura and Jack Diorio
+ */
+#ifndef DATALIST_H
+#define DATALIST_H
 
 #include <algorithm>
 #include <chrono>
@@ -16,7 +18,6 @@ using namespace std;
 using namespace std::chrono;
 using std::scientific;
 // Template class which contains a vector of the template type
-// created in accordance to instruction in brightspace pdf
 template<typename T>
 class DataList {
 
@@ -80,11 +81,15 @@ public:
 
     // Method to randomize dataVec by Zach Vanzura
     vector<T> randomZV(vector<T> copyVec) {
+        // ensure vector size is greater than 1
+        if (copyVec.size() == 1)
+            return copyVec;
+
         // split vector in half
         vector<T> firstHalfVec (copyVec.begin(), (copyVec.begin() + copyVec.size() / 2));
         vector<T> secondHalfVec (copyVec.begin() + copyVec.size() / 2, copyVec.end());
         T temp;
-        // get two random numbers within the range of the sizes of the vectors
+        // random indices for each half 3 line swap. Indices will be in range
         int rand1 = getRandomNumber(firstHalfVec);
         int rand2 = getRandomNumber(secondHalfVec);
 
@@ -94,22 +99,22 @@ public:
         // shuffles each half a random number of times up to the total size of the vector.
         for (int i = 0; i < numRepeats; ++i){
             for (int v1 = 0; v1 < firstHalfVec.size(); ++v1){
-                //get two random numbers and swap the first for the second
+                // get two random numbers and swap the first for the second
                 temp = firstHalfVec[v1];
                 firstHalfVec[v1] = firstHalfVec[rand1];
                 firstHalfVec[rand1] = temp;
                 rand1 = getRandomNumber(firstHalfVec);
             }
             for (int v2 = 0; v2 < secondHalfVec.size(); ++v2){
-                //get two random numbers and swap the first for the second
+                // get two random numbers and swap the first for the second
                 temp = secondHalfVec[v2];
                 secondHalfVec[v2] = secondHalfVec[rand2];
                 secondHalfVec[rand2] = temp;
                 rand2 = getRandomNumber(secondHalfVec);
             }
         }
-        //puts the two half vectors back into the original vector in alternating order
-        //like shuffling a deck of cards
+        // puts the two half vectors back into the original vector in alternating order
+        // like shuffling a deck of cards
         for (int i = 0; i < firstHalfVec.size(); ++i){
             copyVec[i * 2] = firstHalfVec[i];
             copyVec[i * 2 + 1] = secondHalfVec[i];
@@ -117,7 +122,7 @@ public:
         return copyVec;
     }
 
-    //helper function for randomZV returns random number in range of vecor size
+    // helper function for randomZV returns random number in range of vector size
     int getRandomNumber(vector<T> vec){
         return rand() % vec.size();
     }
@@ -212,4 +217,4 @@ public:
 
 };
 
-#endif //M2AP_DATALIST_H
+#endif //DATALIST_H
