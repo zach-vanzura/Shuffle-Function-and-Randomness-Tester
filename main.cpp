@@ -1,8 +1,9 @@
-//
-// Created by Zach Vanzura on 2/8/24.
-//
-
-// This already brings in std namespace and <iostream> (and other stuff)
+/**
+ * The purpose of this program is to test the quality of the shuffle methods in DataList.h
+ * The test shuffles the given data set using two different shuffle methods and comparing the results to the original.
+ * It runs this process 1 millions times and keeps track of the number of times each index starts and ends in the same place
+ * Additionally the method tests for if the dataset was rotated and preserves relative ordering while moving indices.
+ */
 #include <algorithm>
 #include <vector>
 #include "DataList.h"
@@ -17,6 +18,7 @@ int main() {
         cout << "All tests passed for DataList class" << endl;
     }
 
+    // example data set
     vector<int> myVec = {1,2,3,4,5,6,7,8,9,10};
 
     testRandomness<int>(myVec);
@@ -49,6 +51,8 @@ void testRandomness(vector<T> origVec){
             }
         }
 
+        // rotating the shuffled vector and comparing it to the original
+        // compares rotations of 1 to (n - 1)
         rotatedVec = dataVecCopyJD;
         for (int k = 0; k < dataVecCopyJD.size(); ++k){
             rotate(dataVecCopyJD.begin(),dataVecCopyJD.begin() + k, dataVecCopyJD.end());
@@ -65,6 +69,7 @@ void testRandomness(vector<T> origVec){
             }
         }
 
+        // repeating rotation test
         rotatedVec = dataVecCopyZV;
         for (int k = 0; k < dataVecCopyZV.size(); ++k){
             rotate(dataVecCopyZV.begin(),dataVecCopyZV.begin() + k, dataVecCopyZV.end());
@@ -74,6 +79,7 @@ void testRandomness(vector<T> origVec){
         }
     }
 
+    // output counts to the console.
     int index = 1;
     cout << "Jack's Shuffle Function:" << endl;
     for (int item : sameIndexCountsJD) {
@@ -93,6 +99,7 @@ void testRandomness(vector<T> origVec){
     cout << endl;
 }
 
+// testing DataList.h methods
 bool testDataList() {
     bool passed = true;
 
