@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(.)
 
-add_executable(M2AP
+add_executable(main
         main.cpp
         DataList.h)
